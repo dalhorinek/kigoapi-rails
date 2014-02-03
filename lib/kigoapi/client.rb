@@ -2,11 +2,11 @@ module KigoAPI
     class Client
         API_HOST = "app.kigo.net/api/ra/v1/"
 
-        def debug=(bool)
+        def self.debug=(bool)
             @@debug = bool
         end
 
-        def debug
+        def self.debug
             @@debug 
         end
 
