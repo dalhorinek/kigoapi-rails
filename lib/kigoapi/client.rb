@@ -2,6 +2,14 @@ module KigoAPI
     class Client
         API_HOST = "app.kigo.net/api/ra/v1/"
 
+        def debug=(bool)
+            @@debug = bool
+        end
+
+        def debug
+            @@debug 
+        end
+
         def self.auth(username, password)
             @@username = username 
             @@password = password
@@ -30,9 +38,11 @@ module KigoAPI
 
             data = params.to_json
 
-            # puts "[POST] #{name}: #{url} "
-            # puts " --- data --- "
-            # puts data
+            if @@debug 
+              puts "[POST] #{name}: #{url} "
+              puts " --- data --- "
+              puts data
+            end
 
             KigoAPI::Response.new( RestClient.post url, data, :content_type => :json, :accept => :json )
         end
@@ -40,7 +50,9 @@ module KigoAPI
         def self.get(name)
             url = self.url_for(name)
 
-            # puts "[GET] #{name}: #{url} "
+            if @@debug 
+              puts "[GET] #{name}: #{url} "
+            end
 
             KigoAPI::Response.new( RestClient.get url_for(name), :content_type => :json, :accept => :json )
         end

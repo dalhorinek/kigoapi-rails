@@ -1,7 +1,10 @@
 module KigoAPI
     class Response
         def initialize(raw_data)
-            # puts "[DEBUG RESPONSE]: #{raw_data}"
+            if KigoAPI::Client.debug
+              puts "[DEBUG RESPONSE]: #{raw_data}"
+            end
+
             @data = JSON.parse(raw_data).deep_symbolize_keys
         end
 
