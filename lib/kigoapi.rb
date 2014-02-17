@@ -9,6 +9,8 @@ require 'kigoapi/reservation'
 require 'kigoapi/reservation/guest'
 require 'kigoapi/user_defined_reservation_attributes'
 
+require 'kigoapi/properties'
+require 'kigoapi/property'
 
 require 'kigoapi/rent'
 require 'kigoapi/user_defined_reservation_attribute'

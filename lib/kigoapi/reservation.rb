@@ -80,6 +80,7 @@ module KigoAPI
         def as_json(options=nil)
             {
                 :RES_ID => self.id, 
+                :RES_PROP_ID => self.prop_id,
                 :RES_CHECK_IN => self.check_in, 
                 :RES_CHECK_OUT => self.check_out, 
                 :RES_N_ADULTS => self.adults, 
