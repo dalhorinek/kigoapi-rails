@@ -32,12 +32,6 @@ module KigoAPI
 
         def address 
             addr = "#{self.addr1} #{self.street_no}"
-
-            unless self.addr2.blank?
-                addr += ", #{self.addr2}"
-            end
-
-            addr += ", #{self.city}, #{self.postcode}"
         end
 
         private 
