@@ -12,11 +12,12 @@ require 'kigoapi/user_defined_reservation_attributes'
 require 'kigoapi/properties'
 require 'kigoapi/property'
 
-require 'kigoapi/rent'
 require 'kigoapi/user_defined_reservation_attribute'
 require 'kigoapi/per_guest_charge'
+require 'kigoapi/pricing_setup'
+require 'kigoapi/rent'
 require 'kigoapi/price_period'
 require 'kigoapi/price_period/night_amount'
 
-module KigoAPI 
+module KigoAPI
 end
