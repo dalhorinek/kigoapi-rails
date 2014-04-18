@@ -1,5 +1,5 @@
 module KigoAPI
-    class Pricing
+    class PricingSetup
         attr_accessor :PROP_ID
         attr_accessor :PRICING
     end
