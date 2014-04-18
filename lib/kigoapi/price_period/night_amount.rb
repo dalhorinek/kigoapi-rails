@@ -1,28 +1,29 @@
 module KigoAPI
     class PricePeriod::NightAmount
-        attr_accessor :guests_from 
+        attr_accessor :guests_from
         attr_accessor :week_nights
 
-        attr_reader :stay_from 
+        attr_reader :stay_from
 
         def initialize
-            @stay_from = { unit: :night, number: 1 }
+            @stay_from = { :UNIT => :NIGHT, :NUMBER => 1 }
+            @amount = PricePeriod::NightAmount::Amount.new(0)
         end
 
-        def amount 
+        def amount
             @amount
-        end 
+        end
 
         def amount=(number)
-            @amount = PricePeriod::NightAmount::Amount.new(number)
+            @amount.set number
         end
 
         def as_json(options={})
             {
-                :stay_from => @stay_from.as_json, 
-                :week_nights => @week_nights, 
-                :amount => @amount.to_s,
-                :guests_from => @guests_from
+                :GUESTS_FROM => @guests_from,
+                :WEEK_NIGHTS => @week_nights,
+                :STAY_FROM => @stay_from.as_json,
+                :amount => @amount.to_s
             }
         end
     end
@@ -32,11 +33,15 @@ module KigoAPI
             @number = number
         end
 
-        def to_f
-            @number 
+        def set(value)
+            @number = value
         end
 
-        def to_s 
+        def to_f
+            @number
+        end
+
+        def to_s
             "#{@number}.00"
         end
     end

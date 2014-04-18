@@ -4,11 +4,11 @@ module KigoAPI
         attr_accessor :check_out
         attr_accessor :name
         attr_accessor :stay_min
-        attr_accessor :weekly 
-        attr_accessor :weekly_amounts 
+        attr_accessor :weekly
+        attr_accessor :weekly_amounts
         attr_accessor :nightly_amounts
 
-        def initialize 
+        def initialize
             @nightly_amounts = []
             @weekly = false
 
@@ -17,7 +17,7 @@ module KigoAPI
 
         def set_stay_min(unit, number)
             if [:month, :night].include?(unit)
-                self.stay_min = { :unit => unit, :number => number }
+                @stay_min = { :UNIT => unit.to_s.upcase, :NUMBER => number }
             else
                 raise ArgumentError, "Incorrect Unit Type"
             end
@@ -33,19 +33,19 @@ module KigoAPI
             @nightly_amounts.push night_amount
         end
 
-        def as_json 
+        def as_json
             obj = {
-                :check_in => @check_in, 
-                :check_out => @check_out, 
-                :stay_min => @stay_min, 
-                :weekly => @weekly, 
-                :name => @name 
+                :CHECK_IN => @check_in,
+                :CHECK_OUT => @check_out,
+                :NAME => @name,
+                :STAY_MIN => @stay_min,
+                :WEEKLY => @weekly
             }
 
-            if @weekly 
-                obj[:weekly_amounts] = @weekly_amounts
+            if @weekly
+                obj[:WEEKLY_AMOUNTS] = @weekly_amounts
             else
-                obj[:nightly_amounts] = @nightly_amounts
+                obj[:NIGHTLY_AMOUNTS] = @nightly_amounts
             end
 
             obj
