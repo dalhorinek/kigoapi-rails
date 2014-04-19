@@ -8,6 +8,9 @@ module KigoAPI
             @periods = []
         end
 
+        # @param type       One of [ :adults, :adults_children, :adults_children_babies ]
+        # @param standard   Standard occupancy
+        # @param extra      Extra beds
         def set_per_guest_charge(type, standard, max)
             per_guest = KigoAPI::PerGuestCharge.new
             per_guest.type = type
