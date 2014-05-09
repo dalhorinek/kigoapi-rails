@@ -12,8 +12,7 @@ module KigoAPI
         # end
 
         def self.update(pricing)
-            response = KigoAPI::Client.post("updatePropertyPricingSetup", pricing)
-            return response.ok
+            return KigoAPI::Client.post("updatePropertyPricingSetup", pricing)
         end
 
         # def self.create(reservation)
