@@ -13,11 +13,11 @@ module KigoAPI
         end
 
 
-        def ok 
+        def ok
             self.status == "E_OK"
         end
 
-        def result 
+        def result
             @data[:API_RESULT_TEXT]
         end
 

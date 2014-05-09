@@ -7,30 +7,17 @@ module KigoAPI
         end
 
         def self.debug
-            @@debug 
+            @@debug
         end
 
         def self.auth(username, password)
-            @@username = username 
+            @@username = username
             @@password = password
         end
 
 
-        def self.ping 
+        def self.ping
             post("ping", "ping")
-        end
-
-        def updatePropertyPricingSetup(property_id, rent)
-            setup = { 
-                :PROP_ID => property_id, 
-                :PRICING => {
-                    currency: "EUR", 
-                    rent: rent
-                }
-            }
-
-            reponse = post("updatePropertyPricingSetup", setup)
-
         end
 
         def self.post(name, params=nil)
@@ -38,7 +25,7 @@ module KigoAPI
 
             data = params.to_json
 
-            if @@debug 
+            if @@debug
               puts "[POST] #{name}: #{url} "
               puts " --- data --- "
               puts data
@@ -50,7 +37,7 @@ module KigoAPI
         def self.get(name)
             url = self.url_for(name)
 
-            if @@debug 
+            if @@debug
               puts "[GET] #{name}: #{url} "
             end
 

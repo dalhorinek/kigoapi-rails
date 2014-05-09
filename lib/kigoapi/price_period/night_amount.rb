@@ -23,7 +23,7 @@ module KigoAPI
                 :GUESTS_FROM => @guests_from,
                 :WEEK_NIGHTS => @week_nights,
                 :STAY_FROM => @stay_from.as_json,
-                :amount => @amount.to_s
+                :AMOUNT => @amount.to_s
             }
         end
     end

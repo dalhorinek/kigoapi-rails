@@ -24,10 +24,10 @@ module KigoAPI
             @periods.push period
         end
 
-        def as_json
+        def as_json(options=nil)
             {
-                :PERIODS => @periods,
-                :PERGUEST_CHARGE => @per_guest_charge
+                :PERGUEST_CHARGE => @per_guest_charge,
+                :PERIODS => @periods
             }
         end
     end

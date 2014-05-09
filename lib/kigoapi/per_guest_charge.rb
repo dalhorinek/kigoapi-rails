@@ -13,9 +13,9 @@ module KigoAPI
             end
         end
 
-        def as_json
+        def as_json(options=nil)
             {
-                :TYPE => @type,
+                :TYPE => @type.upcase,
                 :STANDARD => @standard,
                 :MAX => @max
             }

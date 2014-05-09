@@ -33,7 +33,7 @@ module KigoAPI
             @nightly_amounts.push night_amount
         end
 
-        def as_json
+        def as_json(options=nil)
             obj = {
                 :CHECK_IN => @check_in,
                 :CHECK_OUT => @check_out,
