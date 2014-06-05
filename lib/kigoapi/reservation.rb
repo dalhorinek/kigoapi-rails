@@ -1,14 +1,14 @@
 module KigoAPI
-    class Reservation 
+    class Reservation
         attr_reader :id
 
-        attr_accessor :check_in 
-        attr_accessor :check_out 
-        attr_accessor :prop_id 
-        attr_accessor :status 
+        attr_accessor :check_in
+        attr_accessor :check_out
+        attr_accessor :prop_id
+        attr_accessor :status
 
         attr_accessor :adults
-        attr_accessor :children 
+        attr_accessor :children
         attr_accessor :babies
 
         attr_accessor :comment
@@ -26,7 +26,7 @@ module KigoAPI
 
             udras = KigoAPI::UserDefinedReservationAttributes.list
 
-            udras.each do |udra| 
+            udras.each do |udra|
                 @udra[udra.to_sym] = udra.clone
             end
 
@@ -69,8 +69,12 @@ module KigoAPI
             end
         end
 
-        def save 
-            if @id 
+        def guests
+            @adults + @children + @babies
+        end
+
+        def save
+            if @id
                 @_reservations.update(self)
             else
                 @_reservations.create(self)
@@ -79,18 +83,18 @@ module KigoAPI
 
         def as_json(options=nil)
             {
-                :RES_ID => self.id, 
+                :RES_ID => self.id,
                 :RES_PROP_ID => self.prop_id,
-                :RES_CHECK_IN => self.check_in, 
-                :RES_CHECK_OUT => self.check_out, 
-                :RES_N_ADULTS => self.adults, 
-                :RES_N_CHILDREN => self.children, 
-                :RES_N_BABIES => self.babies, 
+                :RES_CHECK_IN => self.check_in,
+                :RES_CHECK_OUT => self.check_out,
+                :RES_N_ADULTS => self.adults,
+                :RES_N_CHILDREN => self.children,
+                :RES_N_BABIES => self.babies,
                 :RES_COMMENT => self.comment,
                 :RES_COMMENT_GUEST => self.comment_guest,
                 :RES_GUEST => self.guest,
                 :RES_UDRA => @udra.map do |sym, udra|
-                    udra.as_json 
+                    udra.as_json
                 end
             }
         end
