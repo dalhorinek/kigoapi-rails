@@ -15,6 +15,7 @@ module KigoAPI
         attr_accessor :comment_guest
 
         attr_accessor :guest
+        attr_accessor :payment
 
         attr_accessor :udra
 
@@ -49,6 +50,8 @@ module KigoAPI
                 @guest.email = reservation_data[:RES_GUEST_EMAIL]
                 @guest.phone = reservation_data[:RES_GUEST_PHONE]
                 @guest.country = reservation_data[:RES_GUEST_COUNTRY]
+
+                @payment = KigoAPI::Reservation::Payment.new(reservation_data[:PMT_G2RA])
 
                 if reservation_data[:RES_UDRA]
                     reservation_data[:RES_UDRA].each do |i|
