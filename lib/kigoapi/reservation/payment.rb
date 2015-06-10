@@ -2,19 +2,29 @@ module KigoAPI
     class Reservation::Payment
         attr_accessor :rentdown_due
         attr_accessor :rentdown_due_date
+        attr_accessor :rentdown_paid
+        attr_accessor :rentdown_paid_date
+        attr_accessor :rentdown_method
+        attr_accessor :rentremaining_due
+        attr_accessor :rentremaining_due_date
+        attr_accessor :deposit_due
+        attr_accessor :deposit_due_date
+        attr_accessor :deposit_paid
+        attr_accessor :deposit_paid_date
+        attr_accessor :deposit_method
 
         def initialize(data)
             if data
-            	@rentdown_due = data[:RENTDOWN_DUE]
-            	@rentdown_due_date = data[:RENTDOWN_DUE_DATE]
-            end
-        end
+                data.keys.each do |key| 
+                    prop = key.to_s.downcase
 
-        def as_json(options=nil)
-            {
-                :PMT_RENTDOWN_DUE => self.rentdown_due,
-                :PMT_RENTDOWN_DATE => self.rentdown_due_date
-            }
+                    method = "#{prop}="
+
+                    if self.respond_to? method
+                        self.send method, data[key]
+                    end
+                end
+            end
         end
     end
 end

@@ -7,9 +7,13 @@ require 'kigoapi/version'
 require 'kigoapi/client'
 require 'kigoapi/response'
 
+require 'kigoapi/booking_source'
+require 'kigoapi/booking_sources'
+
 require 'kigoapi/reservations'
 require 'kigoapi/reservation'
 require 'kigoapi/reservation/guest'
+require 'kigoapi/reservation/payment'
 require 'kigoapi/user_defined_reservation_attributes'
 
 require 'kigoapi/properties'

@@ -18,6 +18,7 @@ module KigoAPI
         attr_accessor :payment
 
         attr_accessor :udra
+        attr_accessor :booking_source
 
         def initialize(reservations, reservation_data=nil)
             @_reservations = reservations
@@ -59,6 +60,8 @@ module KigoAPI
                         @udra[udra.to_sym].value = udra.value
                     end
                 end
+
+                @booking_source = KigoAPI::BookingSources.find(reservation_data[:BOOKING_SOURCE_ID])
             end
         end
 

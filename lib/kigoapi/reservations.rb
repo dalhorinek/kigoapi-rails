@@ -1,11 +1,6 @@
 module KigoAPI
     class Reservations
 
-        def self.create(reservation)
-
-        end
-
-
         def self.get(id)
             response = KigoAPI::Client.post("readReservation", { :RES_ID => id })
 

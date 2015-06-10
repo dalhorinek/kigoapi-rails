@@ -11,7 +11,8 @@ module KigoAPI
             :city => :PROP_CITY,
             :postcode => :PROP_POSTCODE,
             :latitude => :PROP_LATITUDE,
-            :longitude => :PROP_LONGITUDE
+            :longitude => :PROP_LONGITUDE,
+            :currency => :PROP_RATE_CURRENCY
         }
 
         def initialize(id=nil)
@@ -31,7 +32,7 @@ module KigoAPI
         end
 
         def address 
-            addr = "#{self.addr1} #{self.street_no}"
+            addr = "#{self.addr1} #{self.street_no}, #{self.city} #{self.postcode}"
         end
 
         private 
