@@ -1,7 +1,7 @@
 module KigoAPI 
     class Properties 
         def self.list
-            response = KigoAPI::Client.post("listProperties", nil)
+            response = KigoAPI::Client.post("listProperties2", nil)
 
             unless response.data 
                 raise "Cannot receive property list"
@@ -17,7 +17,7 @@ module KigoAPI
         end
 
         def self.load(id)
-            response = KigoAPI::Client.post("readProperty", { :PROP_ID => id })
+            response = KigoAPI::Client.post("readProperty2", { :PROP_ID => id })
 
             unless response.data 
                 raise 'No such property'

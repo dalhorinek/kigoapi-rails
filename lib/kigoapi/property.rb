@@ -9,10 +9,10 @@ module KigoAPI
             :addr1 => :PROP_ADDR1,
             :addr2 => :PROP_ADDR2,
             :city => :PROP_CITY,
+            :country => :PROP_COUNTRY,
+            :aptno => :PROP_APTNO,
             :postcode => :PROP_POSTCODE,
-            :latitude => :PROP_LATITUDE,
-            :longitude => :PROP_LONGITUDE,
-            :currency => :PROP_RATE_CURRENCY
+            :latlng => :PROP_LATLNG
         }
 
         def initialize(id=nil)
@@ -22,8 +22,8 @@ module KigoAPI
                 create_method key do 
                     @data ||= fetch
 
-                    if @data and MAPPING.key? key
-                        @data[MAPPING[key]]
+                    if @data and @data[:PROP_INFO] and MAPPING.key? key
+                        @data[:PROP_INFO][MAPPING[key]]
                     else 
                         nil
                     end
