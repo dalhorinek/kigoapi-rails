@@ -20,6 +20,16 @@ module KigoAPI
             post("ping", "ping")
         end
 
+        def self.request(type, url, data, headers) 
+            return RestClient::Request.execute(
+              method: type,
+              url: url, 
+              payload: data,
+              headers: headers,
+              verify_ssl: false
+            )
+        end
+
         def self.post(name, params=nil)
             url = self.url_for(name)
 
@@ -31,7 +41,7 @@ module KigoAPI
               puts data
             end
 
-            KigoAPI::Response.new( RestClient.post url, data, :content_type => :json, :accept => :json )
+            KigoAPI::Response.new( self.request(:post, url, data, { :content_type => :json, :accept => :json }))
         end
 
         def self.get(name)
@@ -41,7 +51,7 @@ module KigoAPI
               puts "[GET] #{name}: #{url} "
             end
 
-            KigoAPI::Response.new( RestClient.get url_for(name), :content_type => :json, :accept => :json )
+            KigoAPI::Response.new( self.request(:get, url, {}, { :content_type => :json, :accept => :json }))
         end
 
         def self.url_for(name)

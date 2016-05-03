@@ -1,6 +1,6 @@
 module KigoAPI
     class UserDefinedReservationAttribute
-        attr_reader :type 
+        attr_reader :type
 
         attr_accessor :id
         attr_accessor :name
@@ -9,9 +9,11 @@ module KigoAPI
         attr_accessor :choices
 
         def initialize(udra)
-            self.type = udra["UDRA_TYPE"].to_sym
-            self.id = udra["UDRA_ID"]
-            self.name = udra["UDRA_NAME"]
+            udra = udra.deep_symbolize_keys
+
+            self.type = udra[:UDRA_TYPE].to_sym
+            self.id = udra[:UDRA_ID]
+            self.name = udra[:UDRA_NAME]
 
             self.text = ""
             self.choices = []
@@ -50,8 +52,8 @@ module KigoAPI
             return self.send(self.dispatch_method)
         end
 
-        def to_sym 
-            self.name.downcase.to_sym 
+        def to_sym
+            self.name.downcase.to_sym
         end
 
         def as_json(options=nil)
@@ -60,7 +62,7 @@ module KigoAPI
             }
 
             if @type == :SINGLE_LINE_TEXT || @type == :MULTI_LINE_TEXT
-                obj[:UDRA_TEXT] = @text 
+                obj[:UDRA_TEXT] = @text
             elsif @type == :SINGLE_CHOICE
                 obj[:UDRA_CHOICE_ID] = @choice_id
             elsif @type == :MULTI_UNORDERED_CHOICE

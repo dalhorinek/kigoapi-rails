@@ -1,6 +1,6 @@
-module KigoAPI 
-    class Property 
-        attr_accessor :prop_id 
+module KigoAPI
+    class Property
+        attr_accessor :prop_id
         attr_accessor :id
 
         MAPPING = {
@@ -12,36 +12,40 @@ module KigoAPI
             :country => :PROP_COUNTRY,
             :aptno => :PROP_APTNO,
             :postcode => :PROP_POSTCODE,
-            :latlng => :PROP_LATLNG
+            :latlng => :PROP_LATLNG,
+            :currency => :PROP_RATE_CURRENCY
         }
 
         def initialize(id=nil)
             self.id = self.prop_id = id
 
-            MAPPING.keys.each do |key| 
-                create_method key do 
+            MAPPING.keys.each do |key|
+                create_method key do
                     @data ||= fetch
+                    mapping = MAPPING[key]
 
-                    if @data and @data[:PROP_INFO] and MAPPING.key? key
+                    if @data and @data[:PROP_INFO] and @data[:PROP_INFO].key? mapping
                         @data[:PROP_INFO][MAPPING[key]]
-                    else 
+                    elsif @data and @data[:PROP_RATE] and @data[:PROP_RATE].key? mapping
+                        @data[:PROP_RATE][MAPPING[key]]
+                    else
                         nil
                     end
                 end
             end
         end
 
-        def address 
+        def address
             addr = "#{self.addr1} #{self.street_no}, #{self.city} #{self.postcode}"
         end
 
-        private 
+        private
 
         def fetch
-            if self.prop_id 
+            if self.prop_id
                 @data ||= KigoAPI::Properties.load(self.prop_id)
             else
-                nil 
+                nil
             end
         end
 

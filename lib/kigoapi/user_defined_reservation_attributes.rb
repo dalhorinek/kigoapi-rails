@@ -28,6 +28,7 @@ module KigoAPI
                 return result
             end
 
+            puts "Udra data: ", response.data
             response.data.each do |item|
                 result.push KigoAPI::UserDefinedReservationAttribute.new(item)
             end

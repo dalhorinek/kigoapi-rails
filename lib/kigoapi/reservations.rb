@@ -7,6 +7,7 @@ module KigoAPI
             unless response.data 
                 raise 'No such reservation'
             else
+                puts "Response data: ", response.data
                 KigoAPI::Reservation.new self, response.data
             end
         end

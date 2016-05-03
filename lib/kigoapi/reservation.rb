@@ -16,6 +16,7 @@ module KigoAPI
 
         attr_accessor :guest
         attr_accessor :payment
+        attr_accessor :ob
 
         attr_accessor :udra
         attr_accessor :booking_source
@@ -29,7 +30,9 @@ module KigoAPI
             udras = KigoAPI::UserDefinedReservationAttributes.list
 
             udras.each do |udra|
+              if udra
                 @udra[udra.to_sym] = udra.clone
+              end
             end
 
             if reservation_data
@@ -54,10 +57,16 @@ module KigoAPI
 
                 @payment = KigoAPI::Reservation::Payment.new(reservation_data[:PMT_G2RA])
 
+                if reservation_data[:OB]
+                  @ob = KigoAPI::Reservation::Booking.new(reservation_data[:OB])
+                end
+
                 if reservation_data[:RES_UDRA]
                     reservation_data[:RES_UDRA].each do |i|
-                        udra = KigoAPI::UserDefinedReservationAttributes.find(i["UDRA_ID"])
-                        @udra[udra.to_sym].value = udra.value
+                        udra = KigoAPI::UserDefinedReservationAttributes.find(i[:UDRA_ID])
+                        if udra
+                          @udra[udra.to_sym].value = udra.value
+                        end
                     end
                 end
 
@@ -99,6 +108,8 @@ module KigoAPI
                 :RES_COMMENT => self.comment,
                 :RES_COMMENT_GUEST => self.comment_guest,
                 :RES_GUEST => self.guest,
+                :OB => self.ob,
+                :PAYMENT => self.payment,
                 :RES_UDRA => @udra.map do |sym, udra|
                     udra.as_json
                 end

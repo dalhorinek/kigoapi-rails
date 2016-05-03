@@ -22,9 +22,9 @@ module KigoAPI
         end
 
         def data
-            # puts " -- response data -- "
-            # puts @data[:API_REPLY]
-            # puts " ------------------- "
+             #puts " -- response data -- "
+             #puts @data[:API_REPLY]
+             #puts " ------------------- "
 
             @reply ||= @data[:API_REPLY]
         end
