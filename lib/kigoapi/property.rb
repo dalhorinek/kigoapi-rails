@@ -16,7 +16,7 @@ module KigoAPI
             :currency => :PROP_RATE_CURRENCY
         }
 
-        def initialize(id=nil)
+        def initialize(id)
             self.id = self.prop_id = id
 
             MAPPING.keys.each do |key|
@@ -36,17 +36,17 @@ module KigoAPI
         end
 
         def address
-            addr = "#{self.addr1} #{self.street_no}, #{self.city} #{self.postcode}"
+          "#{self.addr1} #{self.street_no}, #{self.city} #{self.postcode}"
         end
 
         private
 
         def fetch
-            if self.prop_id
-                @data ||= KigoAPI::Properties.load(self.prop_id)
-            else
-                nil
-            end
+          if self.prop_id
+            @data ||= KigoAPI::Properties.load(self.prop_id)
+          else
+            nil
+          end
         end
 
         def create_method(name, &block)

@@ -4,8 +4,8 @@ module KigoAPI
         def self.get(id)
             response = KigoAPI::Client.post("readReservation", { :RES_ID => id })
 
-            unless response.data 
-                raise 'No such reservation'
+            unless response.data
+                nil
             else
                 puts "Response data: ", response.data
                 KigoAPI::Reservation.new self, response.data
