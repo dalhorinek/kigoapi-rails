@@ -1,21 +1,21 @@
 module KigoAPI
     class BookingSources
-        def self.list 
+        def self.list
             @@bookings_sources ||= fetch
         end
 
         def self.find(id)
             self.list.each do |i|
-                if i.id == id 
-                    return i 
-                end 
+                if i.id == id
+                    return i
+                end
             end
 
             return nil
         end
 
-        private 
-        def self.fetch 
+        private
+        def self.fetch
             response = KigoAPI::Client.post("listBookingSources", nil)
 
             result = []
