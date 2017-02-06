@@ -7,7 +7,7 @@ module KigoAPI
                 raise "Cannot receive property list"
             else
                 response.data.map do |prop|
-                    KigoAPI::Property.new(prop[:PROP_ID])
+                    KigoAPI::Property.new(prop['PROP_ID'])
                 end
             end
         end
